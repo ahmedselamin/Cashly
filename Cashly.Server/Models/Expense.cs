@@ -9,7 +9,7 @@ public class Expense
     public string Title { get; set; } = string.Empty;
     [Column(TypeName = "decimal(18,2)")]
     public decimal Amount { get; set; }
-    public DateTime Date { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
     public int UserId { get; set; }
     [Required]
     public User User { get; set; }
