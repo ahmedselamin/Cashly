@@ -2,6 +2,7 @@ global using Cashly.Server.Data;
 global using Cashly.Server.Models;
 global using Microsoft.EntityFrameworkCore;
 using Cashly.Server.Services.AuthService;
+using Cashly.Server.Services.ExpenseService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -49,6 +50,7 @@ builder.Services.AddDbContext<DataContext>(options =>
 );
 
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IExpenseService, ExpenseService>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
