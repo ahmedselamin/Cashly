@@ -119,7 +119,20 @@ public class ExpenseService : IExpenseService
 
         try
         {
+            var expense = await _context.Expenses
+            .FirstOrDefaultAsync(e => e.Id == ExpenseId && e.UserId == userId);
 
+            if (expense == null)
+            {
+                response.Success = false;
+                response.Message = "Expense not found.";
+                return response;
+            }
+
+            _context.Expenses.Remove(expense);
+            await _context.SaveChangesAsync();
+
+            response.Data = true;
         }
         catch (Exception ex)
         {
