@@ -1,5 +1,7 @@
 ﻿using Cashly.Server.Services.AuthService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Cashly.Server.Controllers
 {
@@ -45,10 +47,11 @@ namespace Cashly.Server.Controllers
             return Ok(response);
         }
 
-        [HttpPost("change-password")]
-        public async Task<ActionResult<ServiceResponse<bool>>> ChangePassword(User request)
+        [HttpPost("change-password"), Authorize]
+        public async Task<ActionResult<ServiceResponse<bool>>> ChangePassword([FromBody] string newPassword)
         {
-            var response = await _authService.Login(request.Username, request.Password);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var response = await _authService.ChangePassword(int.Parse(userId), newPassword);
 
             if (!response.Success)
             {
