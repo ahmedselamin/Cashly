@@ -44,5 +44,18 @@ namespace Cashly.Server.Controllers
 
             return Ok(response);
         }
+
+        [HttpPost("change-password")]
+        public async Task<ActionResult<ServiceResponse<bool>>> ChangePassword(User request)
+        {
+            var response = await _authService.Login(request.Username, request.Password);
+
+            if (!response.Success)
+            {
+                return BadRequest(response.Message);
+            }
+
+            return Ok(response);
+        }
     }
 }
