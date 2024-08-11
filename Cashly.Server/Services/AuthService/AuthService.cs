@@ -83,9 +83,40 @@ public class AuthService : IAuthService
 
         return response;
     }
-    public Task<ServiceResponse<bool>> ChangePassword(int userId, string newPassword)
+    public async Task<ServiceResponse<bool>> ChangePassword(int userId, string newPassword)
     {
-        throw new NotImplementedException();
+        var response = new ServiceResponse<bool>();
+        try
+        {
+            var user = await _context.Users.FindAsync(userId);
+
+            if (user == null)
+            {
+                response.Success = false;
+                response.Message = "Not Found";
+
+                return response;
+            }
+
+            CreatePasswordHash(newPassword, out byte[] passwordHash, out byte[] passwordSalt);
+
+            user.PasswordSalt = passwordSalt;
+            user.PasswordHash = passwordHash;
+
+            await _context.SaveChangesAsync();
+
+
+            response.Message = "Password Changed Successfully";
+            response.Data = true;
+
+        }
+        catch (Exception ex)
+        {
+            response.Success = false;
+            response.Message = ex.Message;
+        }
+
+        return response;
     }
 
     public Task<ServiceResponse<bool>> DeleteUser(int userId)
