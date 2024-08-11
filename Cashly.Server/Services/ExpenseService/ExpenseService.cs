@@ -86,7 +86,7 @@ public class ExpenseService : IExpenseService
         try
         {
             var expense = await _context.Expenses
-                .FirstOrDefaultAsync(e => e.Id == newExpense.Id && e.UserId == userId);
+                .FirstOrDefaultAsync(e => e.Id == expenseId && e.UserId == userId);
             if (expense == null)
             {
                 response.Success = false;
