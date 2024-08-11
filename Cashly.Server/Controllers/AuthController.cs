@@ -53,6 +53,11 @@ namespace Cashly.Server.Controllers
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var response = await _authService.ChangePassword(int.Parse(userId), newPassword);
 
+            if (string.IsNullOrEmpty(userId))
+            {
+                return Unauthorized("User ID not found.");
+            }
+
             if (!response.Success)
             {
                 return BadRequest(response.Message);
@@ -61,7 +66,7 @@ namespace Cashly.Server.Controllers
             return Ok(response);
         }
 
-        [HttpDelete("delete-account")]
+        [HttpDelete("delete-account"), Authorize]
         public async Task<ActionResult<ServiceResponse<bool>>> DeleteUser(int userId)
         {
             var response = await _authService.DeleteUser(userId);
