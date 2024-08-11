@@ -63,7 +63,11 @@ public class ExpenseService : IExpenseService
 
         try
         {
+            expense.UserId = userId;
+            _context.Add(expense);
+            await _context.SaveChangesAsync();
 
+            response.Data = expense;
         }
         catch (Exception ex)
         {
@@ -81,7 +85,14 @@ public class ExpenseService : IExpenseService
 
         try
         {
-
+            var expense = await _context.Expenses
+                .FirstOrDefaultAsync(e => e.Id == newExpense.Id && e.UserId == userId);
+            if (expense == null)
+            {
+                response.Success = false;
+                response.Message = "Expense not found.";
+                return response;
+            }
         }
         catch (Exception ex)
         {
