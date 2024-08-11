@@ -1,5 +1,4 @@
-﻿
-using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -49,9 +48,40 @@ public class AuthService : IAuthService
 
         return response;
     }
-    public Task<ServiceResponse<string>> Login(string username, string password)
+    public async Task<ServiceResponse<string>> Login(string username, string password)
     {
-        throw new NotImplementedException();
+        var response = new ServiceResponse<string>();
+        try
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Username.ToLower()
+            .Equals(username.ToLower()));
+
+            if (user == null)
+            {
+                response.Success = false;
+                response.Message = "User Doesn't Exist";
+
+                return response;
+            }
+            else if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+            {
+                response.Success = false;
+                response.Message = "Wrong Password";
+            }
+            else
+            {
+                response.Data = CreateToken(user);
+            }
+
+
+        }
+        catch (Exception ex)
+        {
+            response.Success = false;
+            response.Message = ex.Message;
+        }
+
+        return response;
     }
     public Task<ServiceResponse<bool>> ChangePassword(int userId, string newPassword)
     {
