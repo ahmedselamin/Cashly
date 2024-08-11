@@ -79,7 +79,7 @@ public class ExpenseService : IExpenseService
         return response;
     }
 
-    public async Task<ServiceResponse<Expense>> UpdateExpense(int userId, int ExpenseId, Expense newExpense)
+    public async Task<ServiceResponse<Expense>> UpdateExpense(int userId, int expenseId, Expense newExpense)
     {
         var response = new ServiceResponse<Expense>();
 
@@ -113,14 +113,14 @@ public class ExpenseService : IExpenseService
         return response;
     }
 
-    public async Task<ServiceResponse<bool>> DeleteExpense(int userId, int ExpenseId)
+    public async Task<ServiceResponse<bool>> DeleteExpense(int userId, int expenseId)
     {
         var response = new ServiceResponse<bool>();
 
         try
         {
             var expense = await _context.Expenses
-            .FirstOrDefaultAsync(e => e.Id == ExpenseId && e.UserId == userId);
+            .FirstOrDefaultAsync(e => e.Id == expenseId && e.UserId == userId);
 
             if (expense == null)
             {
