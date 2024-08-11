@@ -91,8 +91,17 @@ public class ExpenseService : IExpenseService
             {
                 response.Success = false;
                 response.Message = "Expense not found.";
+
                 return response;
             }
+
+            expense.Title = newExpense.Title;
+            expense.Amount = newExpense.Amount;
+            expense.CreatedAt = newExpense.CreatedAt;
+
+            await _context.SaveChangesAsync();
+
+            response.Data = expense;
         }
         catch (Exception ex)
         {
