@@ -20,18 +20,15 @@ import { useNavigate } from 'react-router-dom';
 
 const LandingPage = () => {
     const nav = useNavigate();
-
     const featuresRef = useRef(null);  // Reference to the features section
 
     const [loginOpen, setLoginOpen] = useState(false);
-
     const [joinOpen, setJoinOpen] = useState(false);
 
     const handleScrollToFeatures = () => {
         featuresRef.current.scrollIntoView({ behavior: 'smooth' });
     };
 
-    //login modal dialog
     const handleLoginOpen = () => {
         setLoginOpen(true);
     };
@@ -48,7 +45,6 @@ const LandingPage = () => {
         //nav("/dashboard");
     }
 
-    //sign up modal dialog
     const handleJoinOpen = () => {
         setJoinOpen(true);
     }
@@ -66,7 +62,7 @@ const LandingPage = () => {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="sticky" color="secondary" elevation={0} sx={{ mt: 2, py: 1, borderBottom: '2px solid #f4f6f7', }}>
+            <AppBar position="sticky" color="secondary" elevation={0} sx={{ mt: 2, py: 1, borderBottom: '2px solid #f4f6f7' }}>
                 <Toolbar>
                     <Typography variant="h3" sx={{
                         flexGrow: 1,
@@ -75,23 +71,22 @@ const LandingPage = () => {
                     }}>
                         Cashly
                     </Typography>
-                    <Button variant="outlined" color="primary" sx={{ fontWeight: "400", ml: 4 }} onClick={handleScrollToFeatures}>
+                    <Button variant="outlined" color="primary" sx={{ fontWeight: "600", ml: 4 }} onClick={handleScrollToFeatures}>
                         Features
                     </Button>
                     <Button variant="contained"
                         color="primary"
-                        sx={{ fontWeight: "400", mr: 3, ml: 3 }}
-                        onClick={handleLoginOpen }
-                        >
+                        sx={{ fontWeight: "600", mr: 3, ml: 3 }}
+                        onClick={handleLoginOpen}
+                    >
                         Login
                     </Button>
                 </Toolbar>
             </AppBar>
 
-            <Container maxWidth="md"
+            <Container maxWidth="lg"
                 sx={{
-                    textAlign: 'center'
-                    , mt: 15,
+                    mt: 15,
                     animation: 'slideIn 1s ease-out',
                     '@keyframes slideIn': {
                         '0%': { transform: 'translateY(20px)', opacity: 0 },
@@ -99,32 +94,71 @@ const LandingPage = () => {
                     }
                 }}
             >
-                <Typography variant="h1" gutterBottom sx={{ letterSpacing: '0.10em' }}>
-                    Welcome to Cashly!
-                </Typography>
-                <Typography variant="h6" gutterBottom sx={{ fontWeight: '400', lineHeight: 1.6 }}>
-                    Track your expenses with ease and stay on top of your finances.
-                    <br />
-                    Manage your budget effortlessly, gain full control over your spending habits.
-                </Typography>
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleJoinOpen}
-                    sx={{
-                        mt: 4,
-                        px: 4,
-                        transition: 'transform 0.3s ease',
-                        '&:hover': {
-                            transform: 'scale(1.1)',
-                        },
-                    }}
-                >
-                    Get Started
-                </Button>
+                <Grid container spacing={4} alignItems="center">
+                    {/* Left side - Text */}
+                    <Grid item xs={12} md={6}>
+                        <Typography variant="h1" gutterBottom sx={{ letterSpacing: '0.10em', textAlign: 'left' }}>
+                            Welcome to Cashly!
+                        </Typography>
+                        <Typography variant="h6" gutterBottom sx={{ fontWeight: '400', lineHeight: 1.6, textAlign: 'left' }}>
+                            Track your expenses with ease and stay on top of your finances.
+                            <br />
+                            Manage your budget effortlessly, gain full control over your spending habits.
+                        </Typography>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={handleJoinOpen}
+                            sx={{
+                                mt: 4,
+                                px: 4,
+                                transition: 'transform 0.3s ease',
+                                '&:hover': {
+                                    transform: 'scale(1.1)',
+                                },
+                            }}
+                        >
+                            Get Started
+                        </Button>
+                    </Grid>
+
+                    {/* Right side - SVG placeholder */}
+                    <Grid item xs={12} md={6}>
+                        <Box sx={{ textAlign: 'center' }}>
+                            {/* Replace this box with your SVG */}
+                            <Box
+                                sx={{
+                                    width: '100%',
+                                    height: '300px',
+                                    backgroundColor: '#f0f0f0',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    borderRadius: '8px',
+                                }}
+                            >
+                                <Typography variant="body1">
+                                    SVG Placeholder
+                                </Typography>
+                            </Box>
+                        </Box>
+                    </Grid>
+                </Grid>
                 {/* Features Section */}
-                <Container ref={featuresRef} maxWidth="md" sx={{ fontWeight: '400', lineHeight: 1.6, mt: 13, mb: 10, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                    <Typography variant="h2" gutterBottom sx={{ textAlign: 'center', letterSpacing: '0.10em', mb: 5 }} >
+                <Container ref={featuresRef} maxWidth="md" sx={{
+                    fontWeight: '400',
+                    lineHeight: 1.6,
+                    mt: 13, mb: 10,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    animation: 'slideIn 1s ease-out',
+                    '@keyframes slideIn': {
+                        '0%': { transform: 'translateY(20px)', opacity: 0 },
+                        '100%': { transform: 'translateY(0)', opacity: 1 },
+                    }
+                }}>
+                    <Typography variant="h2" gutterBottom sx={{ textAlign: 'center', letterSpacing: '0.10em', mb: 5 }}>
                         Features
                     </Typography>
                     <Stack spacing={4}>
@@ -166,7 +200,10 @@ const LandingPage = () => {
                         </Grid>
                     </Stack>
                 </Container>
+
             </Container>
+
+            
             {/* Footer Section */}
             <Box sx={{ backgroundColor: '#f7fcfc', py: 4, mt: 'auto' }}>
                 <Container maxWidth="md">
@@ -175,13 +212,14 @@ const LandingPage = () => {
                             Cashly helps you manage your finances effortlessly. Stay on top of your expenses and achieve your financial goals.
                         </Typography>
                     </Grid>
-                    <br/>
+                    <br />
                     <Typography variant="body2" align="center">
                         &copy; {new Date().getFullYear()} Cashly. All rights reserved.
                     </Typography>
                 </Container>
             </Box>
-            {/* Login modal*/}
+
+            {/* Login Modal */}
             <Dialog open={loginOpen} onClose={handleLoginClose}>
                 <DialogTitle>Login</DialogTitle>
                 <DialogContent>
@@ -214,11 +252,11 @@ const LandingPage = () => {
                 </DialogContent>
             </Dialog>
 
-            {/* Join modal*/}
+            {/* Join Modal */}
             <Dialog open={joinOpen} onClose={handleJoinClose}>
                 <DialogTitle>Join</DialogTitle>
                 <DialogContent>
-                    <Box component="form" onSubmit={handleJoinClose} sx={{ mt: 2 }}>
+                    <Box component="form" onSubmit={handleJoinSubmit} sx={{ mt: 2 }}>
                         <TextField
                             margin="dense"
                             name="username"
