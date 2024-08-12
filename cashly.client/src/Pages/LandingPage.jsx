@@ -1,13 +1,48 @@
-import React, { useRef } from 'react';
-import { AppBar, Toolbar, Typography, Button, Container, Box, Grid, Card, CardContent, Stack } from '@mui/material';
+import React, { useState, useRef } from 'react';
+import {
+    AppBar,
+    Toolbar,
+    Typography,
+    Button,
+    Container,
+    Box,
+    Grid,
+    Card,
+    CardContent,
+    Stack,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    TextField,
+} from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 
 const LandingPage = () => {
     const featuresRef = useRef(null);  // Reference to the features section
 
+    const [loginOpen, setLoginOpen] = useState(false);
+
     const handleScrollToFeatures = () => {
         featuresRef.current.scrollIntoView({ behavior: 'smooth' });
     };
+
+    //modal dialog
+    const handleLoginOpen = () => {
+        setLoginOpen(true);
+    };
+
+    const handleLoginClose = () => {
+        setLoginOpen(false);
+    };
+
+    const handleLoginSubmit = (e) => {
+        e.preventDefault();
+
+        console.log("username: " + e.target.username.value);
+
+        handleLoginClose();
+    }
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -16,7 +51,7 @@ const LandingPage = () => {
                     <Typography variant="h3" sx={{
                         flexGrow: 1,
                         fontFamily: 'Dancing Script',
-                        fontWeight: "400",                        
+                        fontWeight: "400",
                     }}>
                         Cashly
                     </Typography>
@@ -26,7 +61,8 @@ const LandingPage = () => {
                     <Button variant="outlined"
                         color="primary"
                         sx={{ fontWeight: "600", mr: 3, ml: 3 }}
-                        component={RouterLink} to="/login">
+                        onClick={handleLoginOpen }
+                        >
                         Login
                     </Button>
                 </Toolbar>
@@ -67,6 +103,7 @@ const LandingPage = () => {
                 >
                     Get Started
                 </Button>
+                {/* Features Section */}
                 <Container ref={featuresRef} maxWidth="md" sx={{ fontWeight: '400', lineHeight: 1.6, mt: 13, mb: 10, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                     <Typography variant="h2" gutterBottom sx={{ textAlign: 'center', letterSpacing: '0.10em', mb: 5 }} >
                         Features
@@ -111,9 +148,6 @@ const LandingPage = () => {
                     </Stack>
                 </Container>
             </Container>
-
-            {/* Features Section */}
-            
             {/* Footer Section */}
             <Box sx={{ backgroundColor: '#f4f6f7', py: 3, mt: 'auto' }}>
                 <Container maxWidth="md">
@@ -126,10 +160,42 @@ const LandingPage = () => {
                         </Typography>
                     </Grid>
                     <Typography variant="body2" align="center">
-                        © 2024 Cashly. All rights reserved.
+                        &copy; {new Date().getFullYear()} Cashly. All rights reserved.
                     </Typography>
                 </Container>
             </Box>
+            {/* Login modal*/}
+            <Dialog open={loginOpen} onClose={handleLoginClose}>
+                <DialogTitle>Login</DialogTitle>
+                <DialogContent>
+                    <Box component="form" onSubmit={handleLoginSubmit} sx={{ mt: 2 }}>
+                        <TextField
+                            margin="dense"
+                            name="username"
+                            label="Username"
+                            type="text"
+                            fullWidth
+                            required
+                        />
+                        <TextField
+                            margin="dense"
+                            name="password"
+                            label="Password"
+                            type="password"
+                            fullWidth
+                            required
+                        />
+                        <DialogActions>
+                            <Button onClick={handleLoginClose} color="primary">
+                                Cancel
+                            </Button>
+                            <Button variant="contained" type="submit" color="primary">
+                                Login
+                            </Button>
+                        </DialogActions>
+                    </Box>
+                </DialogContent>
+            </Dialog>
         </Box>
     );
 };
