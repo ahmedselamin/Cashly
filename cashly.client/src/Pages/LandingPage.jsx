@@ -23,11 +23,13 @@ const LandingPage = () => {
 
     const [loginOpen, setLoginOpen] = useState(false);
 
+    const [joinOpen, setJoinOpen] = useState(false);
+
     const handleScrollToFeatures = () => {
         featuresRef.current.scrollIntoView({ behavior: 'smooth' });
     };
 
-    //modal dialog
+    //login modal dialog
     const handleLoginOpen = () => {
         setLoginOpen(true);
     };
@@ -41,6 +43,22 @@ const LandingPage = () => {
         //logic here
 
         handleLoginClose();
+    }
+
+    //sign up modal dialog
+    const handleJoinOpen = () => {
+        setJoinOpen(true);
+    }
+
+    const handleJoinClose = () => {
+        setJoinOpen(false);
+    }
+
+    const handleJoinSubmit = (e) => {
+        e.preventDefault();
+        //more logic
+
+        handleJoinClose();
     }
 
     return (
@@ -89,8 +107,7 @@ const LandingPage = () => {
                 <Button
                     variant="contained"
                     color="primary"
-                    component={RouterLink}
-                    to="/register"
+                    onClick={handleJoinOpen}
                     sx={{
                         mt: 4,
                         px: 4,
@@ -107,7 +124,7 @@ const LandingPage = () => {
                     <Typography variant="h2" gutterBottom sx={{ textAlign: 'center', letterSpacing: '0.10em', mb: 5 }} >
                         Features
                     </Typography>
-                    <Stack container spacing={4}>
+                    <Stack spacing={4}>
                         <Grid item xs={12} md={4}>
                             <Card sx={{ height: '100%', textAlign: 'center' }}>
                                 <CardContent>
@@ -182,15 +199,45 @@ const LandingPage = () => {
                             fullWidth
                             required
                         />
-                        <Typography variant="body2" sx={{mt: 1} }>
-                            Don't have an account? <a href="/register">Sign up</a>
-                        </Typography>
                         <DialogActions>
                             <Button onClick={handleLoginClose} color="primary">
                                 Cancel
                             </Button>
                             <Button variant="contained" type="submit" color="primary">
                                 Login
+                            </Button>
+                        </DialogActions>
+                    </Box>
+                </DialogContent>
+            </Dialog>
+
+            {/* Join modal*/}
+            <Dialog open={joinOpen} onClose={handleJoinClose}>
+                <DialogTitle>Login</DialogTitle>
+                <DialogContent>
+                    <Box component="form" onSubmit={handleJoinClose} sx={{ mt: 2 }}>
+                        <TextField
+                            margin="dense"
+                            name="username"
+                            label="Username"
+                            type="text"
+                            fullWidth
+                            required
+                        />
+                        <TextField
+                            margin="dense"
+                            name="password"
+                            label="Password"
+                            type="password"
+                            fullWidth
+                            required
+                        />
+                        <DialogActions>
+                            <Button onClick={handleJoinClose} color="primary">
+                                Cancel
+                            </Button>
+                            <Button variant="contained" type="submit" color="primary">
+                                Sign Up
                             </Button>
                         </DialogActions>
                     </Box>
