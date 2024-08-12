@@ -213,7 +213,7 @@ const LandingPage = () => {
 
             {/* Join modal*/}
             <Dialog open={joinOpen} onClose={handleJoinClose}>
-                <DialogTitle>Login</DialogTitle>
+                <DialogTitle>Join</DialogTitle>
                 <DialogContent>
                     <Box component="form" onSubmit={handleJoinClose} sx={{ mt: 2 }}>
                         <TextField
