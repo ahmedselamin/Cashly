@@ -11,15 +11,15 @@ const LandingPage = () => {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static" color="transparent" elevation={0}>
+            <AppBar position="sticky" color="secondary" elevation={0}>
                 <Toolbar>
                     <Typography variant="h3" sx={{ flexGrow: 1, fontFamily: 'Dancing Script', fontWeight: "400" }}>
                         Cashly
                     </Typography>
-                    <Button color="primary" sx={{ fontWeight: "500", ml: 3 }} onClick={handleScrollToFeatures}>
+                    <Button color="primary" sx={{ fontWeight: "600", ml: 3 }} onClick={handleScrollToFeatures}>
                         Features
                     </Button>
-                    <Button variant="outlined" color="primary" sx={{ fontWeight: "500", mr: 3, ml: 3 }} component={RouterLink} to="/login">
+                    <Button variant="outlined" color="primary" sx={{ fontWeight: "600", mr: 3, ml: 3 }} component={RouterLink} to="/login">
                         Login
                     </Button>
                 </Toolbar>
@@ -53,13 +53,13 @@ const LandingPage = () => {
             </Container>
 
             {/* Features Section */}
-            <Container ref={featuresRef} maxWidth="md" sx={{ mt: 10, mb: 10 }}>
-                <Typography variant="h4" gutterBottom sx={{ textAlign: 'center', mb: 5 }}>
-                    Key Features
+            <Container ref={featuresRef} maxWidth="md" sx={{ fontWeight: '400', lineHeight: 1.6, mt: 13, mb: 10, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                <Typography variant="h2" gutterBottom sx={{ textAlign: 'center', letterSpacing: '0.10em', mb: 5 }} >
+                    Features
                 </Typography>
                 <Stack container spacing={4}>
                     <Grid item xs={12} md={4}>
-                        <Card sx={{ height: '100%' }}>
+                        <Card sx={{ height: '100%', textAlign: 'center' }}>
                             <CardContent>
                                 <Typography variant="h5" gutterBottom>
                                     Easy Expense Tracking
@@ -71,7 +71,7 @@ const LandingPage = () => {
                         </Card>
                     </Grid>
                     <Grid item xs={12} md={4}>
-                        <Card sx={{ height: '100%' }}>
+                        <Card sx={{ height: '100%', textAlign: 'center' }}>
                             <CardContent>
                                 <Typography variant="h5" gutterBottom>
                                     Budget Management
@@ -83,7 +83,7 @@ const LandingPage = () => {
                         </Card>
                     </Grid>
                     <Grid item xs={12} md={4}>
-                        <Card sx={{ height: '100%' }}>
+                        <Card sx={{ height: '100%', textAlign: 'center' }}>
                             <CardContent>
                                 <Typography variant="h5" gutterBottom>
                                     Detailed Reports
