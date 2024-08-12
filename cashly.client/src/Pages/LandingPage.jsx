@@ -11,12 +11,12 @@ const LandingPage = () => {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="sticky" color="secondary" elevation={0}>
+            <AppBar position="sticky" color="secondary" elevation={0} sx={{ mt: 2 }}>
                 <Toolbar>
                     <Typography variant="h3" sx={{ flexGrow: 1, fontFamily: 'Dancing Script', fontWeight: "400" }}>
                         Cashly
                     </Typography>
-                    <Button color="primary" sx={{ fontWeight: "600", ml: 3 }} onClick={handleScrollToFeatures}>
+                    <Button color="primary" sx={{ fontWeight: "600", ml: 4 }} onClick={handleScrollToFeatures}>
                         Features
                     </Button>
                     <Button variant="outlined" color="primary" sx={{ fontWeight: "600", mr: 3, ml: 3 }} component={RouterLink} to="/login">
@@ -96,6 +96,22 @@ const LandingPage = () => {
                     </Grid>
                 </Stack>
             </Container>
+            {/* Footer Section */}
+            <Box sx={{ backgroundColor: '#f4f6f7', py: 3, mt: 'auto' }}>
+                <Container maxWidth="md">
+                    <Grid item xs={12} md={4} sx={{ textAlign: 'center' }}>
+                        <Typography variant="h6" gutterBottom>
+                            About Cashly
+                        </Typography>
+                        <Typography variant="body2">
+                            Cashly helps you manage your finances effortlessly. Stay on top of your expenses and achieve your financial goals.
+                        </Typography>
+                    </Grid>
+                    <Typography variant="body2" align="center">
+                        © 2024 Cashly. All rights reserved.
+                    </Typography>
+                </Container>
+            </Box>
         </Box>
     );
 };
