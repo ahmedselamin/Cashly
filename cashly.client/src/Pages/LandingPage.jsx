@@ -16,9 +16,11 @@ import {
     DialogTitle,
     TextField,
 } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const LandingPage = () => {
+    const nav = useNavigate();
+
     const featuresRef = useRef(null);  // Reference to the features section
 
     const [loginOpen, setLoginOpen] = useState(false);
@@ -43,6 +45,7 @@ const LandingPage = () => {
         //logic here
 
         handleLoginClose();
+        //nav("/dashboard");
     }
 
     //sign up modal dialog
