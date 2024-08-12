@@ -38,8 +38,7 @@ const LandingPage = () => {
 
     const handleLoginSubmit = (e) => {
         e.preventDefault();
-
-        console.log("username: " + e.target.username.value);
+        //logic here
 
         handleLoginClose();
     }
@@ -149,12 +148,9 @@ const LandingPage = () => {
                 </Container>
             </Container>
             {/* Footer Section */}
-            <Box sx={{ backgroundColor: '#f4f6f7', py: 3, mt: 'auto' }}>
+            <Box sx={{ backgroundColor: '#f7fcfc', py: 4, mt: 'auto' }}>
                 <Container maxWidth="md">
                     <Grid item xs={12} md={4} sx={{ textAlign: 'center' }}>
-                        <Typography variant="h6" gutterBottom>
-                            About Cashly
-                        </Typography>
                         <Typography variant="body2">
                             Cashly helps you manage your finances effortlessly. Stay on top of your expenses and achieve your financial goals.
                         </Typography>
