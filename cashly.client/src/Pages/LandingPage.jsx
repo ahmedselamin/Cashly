@@ -18,7 +18,7 @@ import {
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import vector from '../assets/vector.svg';
-import StartIcon from '@mui/icons-material/Start';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 const LandingPage = () => {
     const nav = useNavigate();
@@ -121,7 +121,8 @@ const LandingPage = () => {
                                 },
                             }}
                         >
-                            Get Started
+                            Get Started   
+                            <KeyboardArrowRightIcon />
                         </Button>
                     </Grid>
 
