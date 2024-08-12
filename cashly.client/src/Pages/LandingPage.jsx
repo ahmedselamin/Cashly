@@ -115,6 +115,7 @@ const LandingPage = () => {
                             sx={{
                                 mt: 4,
                                 px: 4,
+                                py: 1.3,
                                 transition: 'transform 0.3s ease',
                                 '&:hover': {
                                     transform: 'scale(1.1)',
