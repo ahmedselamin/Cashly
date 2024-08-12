@@ -17,6 +17,7 @@ import {
     TextField,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import vector from '../Assets/Vector.svg';
 
 const LandingPage = () => {
     const nav = useNavigate();
@@ -92,8 +93,8 @@ const LandingPage = () => {
                         '0%': { transform: 'translateY(20px)', opacity: 0 },
                         '100%': { transform: 'translateY(0)', opacity: 1 },
                     }
-                }}
-            >
+                }}>
+
                 <Grid container spacing={4} alignItems="center">
                     {/* Left side - Text */}
                     <Grid item xs={12} md={6}>
@@ -101,9 +102,7 @@ const LandingPage = () => {
                             Welcome to Cashly!
                         </Typography>
                         <Typography variant="h6" gutterBottom sx={{ fontWeight: '400', lineHeight: 1.6, textAlign: 'left' }}>
-                            Track your expenses with ease and stay on top of your finances.
-                            <br />
-                            Manage your budget effortlessly, gain full control over your spending habits.
+                            Track your expenses with ease and manage your expenses effortlessly, gain full control over your spending habits.
                         </Typography>
                         <Button
                             variant="contained"
@@ -122,25 +121,18 @@ const LandingPage = () => {
                         </Button>
                     </Grid>
 
-                    {/* Right side - SVG placeholder */}
+                    {/* SVG placeholder */}
                     <Grid item xs={12} md={6}>
                         <Box sx={{ textAlign: 'center' }}>
-                            {/* Replace this box with your SVG */}
-                            <Box
-                                sx={{
+                            <img
+                                src={vector}
+                                alt="Cashly Illustration"
+                                style={{
                                     width: '100%',
-                                    height: '300px',
-                                    backgroundColor: '#f0f0f0',
-                                    display: 'flex',
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                    borderRadius: '8px',
+                                    height: 'auto',
+                                    maxWidth: '800px' 
                                 }}
-                            >
-                                <Typography variant="body1">
-                                    SVG Placeholder
-                                </Typography>
-                            </Box>
+                            />
                         </Box>
                     </Grid>
                 </Grid>
@@ -148,7 +140,7 @@ const LandingPage = () => {
                 <Container ref={featuresRef} maxWidth="md" sx={{
                     fontWeight: '400',
                     lineHeight: 1.6,
-                    mt: 13, mb: 10,
+                    mt: 20, mb: 10,
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'center',
