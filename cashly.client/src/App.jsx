@@ -4,7 +4,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import theme from './theme';
 import LandingPage from './pages/LandingPage';
 import Dashboard from './Pages/Dashboard';
-import AppProvider from './Context/AppContext'
+import AppProvider from './Context/AppContext';
+import ProtectedRoute from './Components/ProtectedRoute';
 
 function App() {
     return (
@@ -13,7 +14,13 @@ function App() {
                 <Router>
                     <Routes>
                         <Route path="/" element={<LandingPage />} />
-                        <Route path="/dashboard" element={<Dashboard />} />
+                        <Route path="/dashboard"
+                            element={
+                                <ProtectedRoute>
+                                    <Dashboard />
+                                </ProtectedRoute>
+                            }
+                        />
                     </Routes>
                 </Router>
             </AppProvider>
