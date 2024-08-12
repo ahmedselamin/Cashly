@@ -155,6 +155,7 @@ const LandingPage = () => {
                             Cashly helps you manage your finances effortlessly. Stay on top of your expenses and achieve your financial goals.
                         </Typography>
                     </Grid>
+                    <br/>
                     <Typography variant="body2" align="center">
                         &copy; {new Date().getFullYear()} Cashly. All rights reserved.
                     </Typography>
@@ -181,6 +182,9 @@ const LandingPage = () => {
                             fullWidth
                             required
                         />
+                        <Typography variant="body2" sx={{mt: 1} }>
+                            Don't have an account? <a href="/register">Sign up</a>
+                        </Typography>
                         <DialogActions>
                             <Button onClick={handleLoginClose} color="primary">
                                 Cancel
