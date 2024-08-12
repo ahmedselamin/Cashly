@@ -11,7 +11,7 @@ const LandingPage = () => {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="sticky" color="secondary" elevation={0} sx={{ mt: 2 }}>
+            <AppBar position="sticky" color="secondary" elevation={0} sx={{ mt: 2, py: 1, borderBottom: '2px solid #f4f6f7', }}>
                 <Toolbar>
                     <Typography variant="h3" sx={{ flexGrow: 1, fontFamily: 'Dancing Script', fontWeight: "400" }}>
                         Cashly
@@ -19,7 +19,10 @@ const LandingPage = () => {
                     <Button color="primary" sx={{ fontWeight: "600", ml: 4 }} onClick={handleScrollToFeatures}>
                         Features
                     </Button>
-                    <Button variant="outlined" color="primary" sx={{ fontWeight: "600", mr: 3, ml: 3 }} component={RouterLink} to="/login">
+                    <Button variant="outlined"
+                        color="primary"
+                        sx={{ fontWeight: "600", mr: 3, ml: 3 }}
+                        component={RouterLink} to="/login">
                         Login
                     </Button>
                 </Toolbar>
