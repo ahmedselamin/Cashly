@@ -17,7 +17,8 @@ import {
     TextField,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import vector from '../Assets/Vector.svg';
+import vector from '../assets/vector.svg';
+import StartIcon from '@mui/icons-material/Start';
 
 const LandingPage = () => {
     const nav = useNavigate();
@@ -40,10 +41,9 @@ const LandingPage = () => {
 
     const handleLoginSubmit = (e) => {
         e.preventDefault();
-        //logic here
-
+        // logic here
         handleLoginClose();
-        //nav("/dashboard");
+        // nav("/dashboard");
     }
 
     const handleJoinOpen = () => {
@@ -56,14 +56,17 @@ const LandingPage = () => {
 
     const handleJoinSubmit = (e) => {
         e.preventDefault();
-        //more logic
-
+        // logic here
         handleJoinClose();
     }
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="sticky" color="secondary" elevation={0} sx={{ mt: 2, py: 1, borderBottom: '2px solid #f4f6f7' }}>
+        <Box sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            minHeight: '100vh'  // Ensure full height
+        }}>
+            <AppBar position="sticky" color="secondary" elevation={0} sx={{ py: 1, borderBottom: '2px solid #f4f6f7' }}>
                 <Toolbar>
                     <Typography variant="h3" sx={{
                         flexGrow: 1,
@@ -72,12 +75,14 @@ const LandingPage = () => {
                     }}>
                         Cashly
                     </Typography>
-                    <Button variant="outlined" color="primary" sx={{ fontWeight: "600", ml: 4 }} onClick={handleScrollToFeatures}>
+                    <Button variant="outlined" color="primary" sx={{ fontWeight: "400", ml: 4 }}
+                        //onClick={handleScrollToFeatures}
+                    >
                         Features
                     </Button>
                     <Button variant="contained"
                         color="primary"
-                        sx={{ fontWeight: "600", mr: 3, ml: 3 }}
+                        sx={{ fontWeight: "400", mr: 3, ml: 3 }}
                         onClick={handleLoginOpen}
                     >
                         Login
@@ -85,23 +90,22 @@ const LandingPage = () => {
                 </Toolbar>
             </AppBar>
 
-            <Container maxWidth="lg"
-                sx={{
-                    mt: 15,
-                    animation: 'slideIn 1s ease-out',
-                    '@keyframes slideIn': {
-                        '0%': { transform: 'translateY(20px)', opacity: 0 },
-                        '100%': { transform: 'translateY(0)', opacity: 1 },
-                    }
-                }}>
-
+            <Container maxWidth="lg" sx={{
+                flexGrow: 1,
+                mt: 15,
+                animation: 'slideIn 1s ease-out',
+                '@keyframes slideIn': {
+                    '0%': { transform: 'translateY(20px)', opacity: 0 },
+                    '100%': { transform: 'translateY(0)', opacity: 1 },
+                }
+            }}>
                 <Grid container spacing={4} alignItems="center">
-                    {/* Left side - Text */}
+                    {/* Left side */}
                     <Grid item xs={12} md={6}>
                         <Typography variant="h1" gutterBottom sx={{ letterSpacing: '0.10em', textAlign: 'left' }}>
                             Welcome to Cashly!
                         </Typography>
-                        <Typography variant="h6" gutterBottom sx={{ fontWeight: '400', lineHeight: 1.6, textAlign: 'left' }}>
+                        <Typography variant="h6" gutterBottom sx={{ fontWeight: '500', lineHeight: 1.6, textAlign: 'left' }}>
                             Track your expenses with ease and manage your expenses effortlessly, gain full control over your spending habits.
                         </Typography>
                         <Button
@@ -121,88 +125,87 @@ const LandingPage = () => {
                         </Button>
                     </Grid>
 
-                    {/* SVG placeholder */}
+                    {/* Right side - SVG */}
                     <Grid item xs={12} md={6}>
                         <Box sx={{ textAlign: 'center' }}>
                             <img
                                 src={vector}
-                                alt="Cashly Illustration"
+                                alt="Cashly illustration"
                                 style={{
                                     width: '100%',
                                     height: 'auto',
-                                    maxWidth: '800px' 
+                                    maxWidth: '400px' // Ensure it scales well
                                 }}
                             />
                         </Box>
                     </Grid>
                 </Grid>
-                {/* Features Section */}
-                <Container ref={featuresRef} maxWidth="md" sx={{
-                    fontWeight: '400',
-                    lineHeight: 1.6,
-                    mt: 20, mb: 10,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    animation: 'slideIn 1s ease-out',
-                    '@keyframes slideIn': {
-                        '0%': { transform: 'translateY(20px)', opacity: 0 },
-                        '100%': { transform: 'translateY(0)', opacity: 1 },
-                    }
-                }}>
-                    <Typography variant="h2" gutterBottom sx={{ textAlign: 'center', letterSpacing: '0.10em', mb: 5 }}>
-                        Features
-                    </Typography>
-                    <Stack spacing={4}>
-                        <Grid item xs={12} md={4}>
-                            <Card sx={{ height: '100%', textAlign: 'center' }}>
-                                <CardContent>
-                                    <Typography variant="h5" gutterBottom>
-                                        Easy Expense Tracking
-                                    </Typography>
-                                    <Typography variant="body2">
-                                        Quickly add and categorize expenses, making it simple to keep track of your spending.
-                                    </Typography>
-                                </CardContent>
-                            </Card>
-                        </Grid>
-                        <Grid item xs={12} md={4}>
-                            <Card sx={{ height: '100%', textAlign: 'center' }}>
-                                <CardContent>
-                                    <Typography variant="h5" gutterBottom>
-                                        Budget Management
-                                    </Typography>
-                                    <Typography variant="body2">
-                                        Set and manage your budgets, ensuring you never overspend and stay on top of your finances.
-                                    </Typography>
-                                </CardContent>
-                            </Card>
-                        </Grid>
-                        <Grid item xs={12} md={4}>
-                            <Card sx={{ height: '100%', textAlign: 'center' }}>
-                                <CardContent>
-                                    <Typography variant="h5" gutterBottom>
-                                        Detailed Reports
-                                    </Typography>
-                                    <Typography variant="body2">
-                                        Generate insightful reports that help you analyze your spending patterns and make informed decisions.
-                                    </Typography>
-                                </CardContent>
-                            </Card>
-                        </Grid>
-                    </Stack>
-                </Container>
-
             </Container>
 
-            
+            {/* Features Section */}
+            {/*<Container ref={featuresRef} maxWidth="md" sx={{ fontWeight: '400', lineHeight: 1.6, mt: 13, mb: 10, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>*/}
+            {/*    <Typography variant="h2" gutterBottom sx={{ textAlign: 'center', letterSpacing: '0.10em', mb: 5 }}>*/}
+            {/*        Features*/}
+            {/*    </Typography>*/}
+            {/*    <Stack spacing={4}>*/}
+            {/*        <Grid item xs={12} md={4}>*/}
+            {/*            <Card sx={{ height: '100%', textAlign: 'center' }}>*/}
+            {/*                <CardContent>*/}
+            {/*                    <Typography variant="h5" gutterBottom>*/}
+            {/*                        Easy Expense Tracking*/}
+            {/*                    </Typography>*/}
+            {/*                    <Typography variant="body2">*/}
+            {/*                        Quickly add and categorize expenses, making it simple to keep track of your spending.*/}
+            {/*                    </Typography>*/}
+            {/*                </CardContent>*/}
+            {/*            </Card>*/}
+            {/*        </Grid>*/}
+            {/*        <Grid item xs={12} md={4}>*/}
+            {/*            <Card sx={{ height: '100%', textAlign: 'center' }}>*/}
+            {/*                <CardContent>*/}
+            {/*                    <Typography variant="h5" gutterBottom>*/}
+            {/*                        Budget Management*/}
+            {/*                    </Typography>*/}
+            {/*                    <Typography variant="body2">*/}
+            {/*                        Set and manage your budgets, ensuring you never overspend and stay on top of your finances.*/}
+            {/*                    </Typography>*/}
+            {/*                </CardContent>*/}
+            {/*            </Card>*/}
+            {/*        </Grid>*/}
+            {/*        <Grid item xs={12} md={4}>*/}
+            {/*            <Card sx={{ height: '100%', textAlign: 'center' }}>*/}
+            {/*                <CardContent>*/}
+            {/*                    <Typography variant="h5" gutterBottom>*/}
+            {/*                        Detailed Reports*/}
+            {/*                    </Typography>*/}
+            {/*                    <Typography variant="body2">*/}
+            {/*                        Generate insightful reports that help you analyze your spending patterns and make informed decisions.*/}
+            {/*                    </Typography>*/}
+            {/*                </CardContent>*/}
+            {/*            </Card>*/}
+            {/*        </Grid>*/}
+            {/*    </Stack>*/}
+            {/*</Container>*/}
+
             {/* Footer Section */}
-            <Box sx={{ backgroundColor: '#f7fcfc', py: 4, mt: 'auto' }}>
+            <Box component="footer" sx={{
+                backgroundColor: '#f7fcfc',
+                textAlign: "center",
+                py: 3
+            }}>
                 <Container maxWidth="md">
                     <Grid item xs={12} md={4} sx={{ textAlign: 'center' }}>
-                        <Typography variant="body2">
-                            Cashly helps you manage your finances effortlessly. Stay on top of your expenses and achieve your financial goals.
-                        </Typography>
+                        <Box>
+                            <Button color="inherit" href="#" >
+                                Privacy Policy
+                            </Button>
+                            <Button color="inherit" href="#" >
+                                Terms of Service
+                            </Button>
+                            <Button color="inherit" href="#">
+                                Contact Us
+                            </Button>
+                        </Box>
                     </Grid>
                     <br />
                     <Typography variant="body2" align="center">
