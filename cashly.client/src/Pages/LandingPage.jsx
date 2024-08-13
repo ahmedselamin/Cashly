@@ -62,17 +62,18 @@ const LandingPage = () => {
 
     return (
         <Box sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            minHeight: '100vh'  // Ensure full height
-        }}>
+                display: 'flex',
+                flexDirection: 'column',
+                minHeight: '100vh'  // Ensure full height
+             }}>
             <AppBar position="sticky" color="secondary" elevation={0} sx={{ py: 1, borderBottom: '2px solid #f4f6f7' }}>
                 <Toolbar>
-                    <Typography variant="h3" sx={{
-                        flexGrow: 1,
-                        fontFamily: 'Dancing Script',
-                        fontWeight: "400",
-                    }}>
+                    <Typography variant="h3"
+                       sx={{
+                           flexGrow: 1,
+                           fontFamily: 'Dancing Script',
+                           fontWeight: "400",
+                       }}>
                         Cashly
                     </Typography>
                     <Button variant="outlined" color="primary" sx={{ fontWeight: "400", ml: 4 }}
@@ -92,22 +93,21 @@ const LandingPage = () => {
 
             <Container maxWidth="lg"
                 sx={{
-                  flexGrow: 1,
-                   mt: 15,
+                    mt: 17,
                    animation: 'slideIn 1s ease-out',
                    '@keyframes slideIn': {
                     '0%': { transform: 'translateY(20px)', opacity: 0 },
                     '100%': { transform: 'translateY(0)', opacity: 1 },
                    }
                 }}>
-                <Grid container spacing={4} alignItems="center">
+                <Grid container spacing={8}>
                     {/* Left side */}
                     <Grid item xs={12} md={6}>
                         <Typography variant="h1" gutterBottom sx={{ letterSpacing: '0.10em', textAlign: 'left' }}>
                             Welcome to Cashly!
                         </Typography>
                         <Typography variant="h6" gutterBottom sx={{ fontWeight: '500', lineHeight: 1.6, textAlign: 'left' }}>
-                            Track your expenses with ease and manage your expenses effortlessly, gain full control over your spending habits.
+                            Simplify your finances by tracking expenses, and gaining insights into your spending habits.
                         </Typography>
                         <Button
                             variant="contained"
@@ -115,8 +115,8 @@ const LandingPage = () => {
                             onClick={handleJoinOpen}
                             sx={{
                                 mt: 4,
-                                px: 4,
-                                py: 1.3,
+                                px: 3,
+                                py: 1.5,
                                 transition: 'transform 0.3s ease',
                                 '&:hover': {
                                     transform: 'scale(1.1)',
@@ -137,7 +137,7 @@ const LandingPage = () => {
                                 style={{
                                     width: '100%',
                                     height: 'auto',
-                                    maxWidth: '550px'
+                                    maxWidth: '600px'
                                 }}
                             />
                         </Box>
@@ -191,11 +191,13 @@ const LandingPage = () => {
             {/*</Container>*/}
 
             {/* Footer Section */}
-            <Box component="footer" sx={{
-                backgroundColor: '#f7fcfc',
-                textAlign: "center",
-                py: 3
-            }}>
+            <Box component="footer"
+                sx={{
+                  backgroundColor: '#f7fcfc',
+                  textAlign: "center",
+                    py: 1,
+                   mt: "auto"
+                }}>
                 <Container maxWidth="md">
                     <Typography variant="body2" align="center">
                         &copy; {new Date().getFullYear()} Cashly. All rights reserved.
