@@ -90,15 +90,16 @@ const LandingPage = () => {
                 </Toolbar>
             </AppBar>
 
-            <Container maxWidth="lg" sx={{
-                flexGrow: 1,
-                mt: 15,
-                animation: 'slideIn 1s ease-out',
-                '@keyframes slideIn': {
+            <Container maxWidth="lg"
+                sx={{
+                  flexGrow: 1,
+                   mt: 15,
+                   animation: 'slideIn 1s ease-out',
+                   '@keyframes slideIn': {
                     '0%': { transform: 'translateY(20px)', opacity: 0 },
                     '100%': { transform: 'translateY(0)', opacity: 1 },
-                }
-            }}>
+                   }
+                }}>
                 <Grid container spacing={4} alignItems="center">
                     {/* Left side */}
                     <Grid item xs={12} md={6}>
@@ -136,7 +137,7 @@ const LandingPage = () => {
                                 style={{
                                     width: '100%',
                                     height: 'auto',
-                                    maxWidth: '400px' // Ensure it scales well
+                                    maxWidth: '550px'
                                 }}
                             />
                         </Box>
@@ -196,20 +197,6 @@ const LandingPage = () => {
                 py: 3
             }}>
                 <Container maxWidth="md">
-                    <Grid item xs={12} md={4} sx={{ textAlign: 'center' }}>
-                        <Box>
-                            <Button color="inherit" href="#" >
-                                Privacy Policy
-                            </Button>
-                            <Button color="inherit" href="#" >
-                                Terms of Service
-                            </Button>
-                            <Button color="inherit" href="#">
-                                Contact Us
-                            </Button>
-                        </Box>
-                    </Grid>
-                    <br />
                     <Typography variant="body2" align="center">
                         &copy; {new Date().getFullYear()} Cashly. All rights reserved.
                     </Typography>
