@@ -83,7 +83,7 @@ const LandingPage = () => {
                     </Button>
                     <Button variant="contained"
                         color="primary"
-                        sx={{ fontWeight: "400", mr: 3, ml: 3 }}
+                        sx={{ fontWeight: "400", ml: 2.5 }}
                         onClick={handleLoginOpen}
                     >
                         Login
