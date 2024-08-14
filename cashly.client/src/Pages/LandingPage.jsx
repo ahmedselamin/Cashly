@@ -99,9 +99,10 @@ const LandingPage = () => {
                 </Toolbar>
             </AppBar>
 
-            <Container maxWidth="lg"
+            <Container
+                maxWidth="lg"
                 sx={{
-                    mt: 12,
+                    mt: 14,
                    animation: 'slideIn 1s ease-out',
                    '@keyframes slideIn': {
                     '0%': { transform: 'translateY(20px)', opacity: 0 },
@@ -131,7 +132,7 @@ const LandingPage = () => {
                                 },
                             }}
                         >
-                            Get Started   
+                            Join Now   
                             <KeyboardArrowRightIcon />
                         </Button>
                     </Grid>
@@ -143,9 +144,9 @@ const LandingPage = () => {
                                 src={vector}
                                 alt="Cashly illustration"
                                 style={{
-                                    width: '100%',
+                                    width: '110%',
                                     height: 'auto',
-                                    maxWidth: '600px'
+                                    maxWidth: '800px'
                                 }}
                             />
                         </Box>
