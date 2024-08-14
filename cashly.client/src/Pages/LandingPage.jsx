@@ -76,17 +76,25 @@ const LandingPage = () => {
                        }}>
                         Cashly
                     </Typography>
-                    <Button variant="outlined" color="primary" sx={{ fontWeight: "400", ml: 4 }}
+                    <Button
                         //onClick={handleScrollToFeatures}
-                    >
+                        variant="outlined"
+                        color="primary"
+                        sx={{
+                            fontWeight: "400",
+                            ml: 2.5
+                        }}>
                         Features
                     </Button>
-                    <Button variant="contained"
-                        color="primary"
-                        sx={{ fontWeight: "400", ml: 2.5 }}
+                    <Button
                         onClick={handleLoginOpen}
-                    >
-                        Login
+                        variant="contained"
+                        color="primary"
+                        sx={{
+                            fontWeight: "400",
+                            ml: 2.5                            
+                        }}>
+                      Login
                     </Button>
                 </Toolbar>
             </AppBar>
