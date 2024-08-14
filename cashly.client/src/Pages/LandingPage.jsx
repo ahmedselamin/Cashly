@@ -93,7 +93,7 @@ const LandingPage = () => {
 
             <Container maxWidth="lg"
                 sx={{
-                    mt: 17,
+                    mt: 12,
                    animation: 'slideIn 1s ease-out',
                    '@keyframes slideIn': {
                     '0%': { transform: 'translateY(20px)', opacity: 0 },
