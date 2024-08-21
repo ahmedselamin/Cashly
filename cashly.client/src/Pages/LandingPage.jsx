@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     AppBar,
     Toolbar,
@@ -20,7 +20,8 @@ import vector from '../assets/vector.svg';  // Import the SVG file
 
 const LandingPage = () => {
     const nav = useNavigate();
-    const { handleLogin, handleRegister, error } = useAppContext();  // Destructure auth functions and error
+
+    const { isAuthenticated, handleLogin, handleRegister, error } = useAppContext();  // Destructure auth functions and error
 
     const [loginOpen, setLoginOpen] = useState(false);
     const [joinOpen, setJoinOpen] = useState(false);
@@ -38,6 +39,7 @@ const LandingPage = () => {
         try {
             await handleLogin(formData.username, formData.password);
             setLoginOpen(false);
+            console.log("successfull login")
             nav("/dashboard");
         } catch (error) {
             console.error("Login failed", error);
@@ -49,11 +51,17 @@ const LandingPage = () => {
         try {
             await handleRegister(formData.username, formData.password);
             setJoinOpen(false);
-            nav("/dashboard");
+            //nav("/dashboard");
         } catch (error) {
             console.error("Registration failed", error);
         }
     };
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            nav("/dashboard");
+        }
+    }, [isAuthenticated, nav]);
 
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>

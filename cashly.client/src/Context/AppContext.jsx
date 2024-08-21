@@ -21,6 +21,7 @@ const AppProvider = ({ children }) => {
             setUser(data);
             setIsAuthenticated(true);
             setError(null);
+            console.log('isAuthenticated:', isAuthenticated);
         } catch (error) {
             setError(error.message);  // Set the error message here
         }
@@ -38,7 +39,7 @@ const AppProvider = ({ children }) => {
     };
 
     const handleLogout = () => {
-        logout();
+        logout();    
         setUser(null);
         setIsAuthenticated(false);
         setError(null);
