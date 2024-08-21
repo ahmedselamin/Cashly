@@ -1,19 +1,19 @@
 import React, { useState, useContext, createContext } from 'react';
 import { register, login, logout } from '../Services/AuthService';
 
-//context
+// context
 const AppContext = createContext();
 
-//custom hook
+// custom hook
 export const useAppContext = () => useContext(AppContext);
 
-//provider component
+// provider component
 
 const AppProvider = ({ children }) => {
-    //state vars
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem('user'))||null);
-    const [isAuthenticated, setIsAuthenticated] = useState(!!user); //login state
-    const [error, setError] = useState(null);   //store any error
+    // state vars
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || null);
+    const [isAuthenticated, setIsAuthenticated] = useState(!!user); // login state
+    const [error, setError] = useState(null);   // store any error
 
     const handleLogin = async (username, password) => {
         try {
@@ -22,7 +22,7 @@ const AppProvider = ({ children }) => {
             setIsAuthenticated(true);
             setError(null);
         } catch (error) {
-            console.log(error.message)
+            setError(error.message);  // Set the error message here
         }
     };
 
@@ -31,9 +31,9 @@ const AppProvider = ({ children }) => {
             const data = await register(username, password);
             setUser(data);
             setIsAuthenticated(true);
-            setError(null); 
+            setError(null);
         } catch (error) {
-            console.log(error.message)
+            setError(error.message);  // Set the error message here
         }
     };
 

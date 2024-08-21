@@ -79,6 +79,7 @@ const LandingPage = () => {
                 </Toolbar>
             </AppBar>
 
+
             <Container maxWidth="lg" sx={{ flexGrow: 1, mt: 15 }}>
                 <Grid container spacing={4} alignItems="center">
                     {/* Left side - Text */}
