@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import {
     AppBar,
     Toolbar,
@@ -7,133 +7,104 @@ import {
     Container,
     Box,
     Grid,
-    Card,
-    CardContent,
-    Stack,
     Dialog,
     DialogActions,
     DialogContent,
     DialogTitle,
     TextField,
+    Alert
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import vector from '../assets/vector.svg';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import { useAppContext } from '../Context/AppContext';  // Import the context
+import vector from '../assets/vector.svg';  // Import the SVG file
 
 const LandingPage = () => {
     const nav = useNavigate();
-    const featuresRef = useRef(null);  // Reference to the features section
+    const { handleLogin, handleRegister, error } = useAppContext();  // Destructure auth functions and error
 
     const [loginOpen, setLoginOpen] = useState(false);
     const [joinOpen, setJoinOpen] = useState(false);
+    const [formData, setFormData] = useState({ username: '', password: '' });
 
-    const handleScrollToFeatures = () => {
-        featuresRef.current.scrollIntoView({ behavior: 'smooth' });
+    const handleInputChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value,
+        });
     };
 
-    const handleLoginOpen = () => {
-        setLoginOpen(true);
-    };
-
-    const handleLoginClose = () => {
-        setLoginOpen(false);
-    };
-
-    const handleLoginSubmit = (e) => {
+    const handleLoginSubmit = async (e) => {
         e.preventDefault();
-        // logic here
-        handleLoginClose();
-        // nav("/dashboard");
-    }
+        try {
+            await handleLogin(formData.username, formData.password);
+            setLoginOpen(false);
+            nav("/dashboard");
+        } catch (error) {
+            console.error("Login failed", error);
+        }
+    };
 
-    const handleJoinOpen = () => {
-        setJoinOpen(true);
-    }
-
-    const handleJoinClose = () => {
-        setJoinOpen(false);
-    }
-
-    const handleJoinSubmit = (e) => {
+    const handleRegisterSubmit = async (e) => {
         e.preventDefault();
-        // logic here
-        handleJoinClose();
-    }
+        try {
+            await handleRegister(formData.username, formData.password);
+            setJoinOpen(false);
+            nav("/dashboard");
+        } catch (error) {
+            console.error("Registration failed", error);
+        }
+    };
 
     return (
-        <Box sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                minHeight: '100vh'  // Ensure full height
-             }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
             <AppBar position="sticky" color="secondary" elevation={0} sx={{ py: 1, borderBottom: '2px solid #f4f6f7' }}>
                 <Toolbar>
-                    <Typography variant="h3"
-                       sx={{
-                           flexGrow: 1,
-                           fontFamily: 'Dancing Script',
-                           fontWeight: "400",
-                       }}>
+                    <Typography variant="h3" sx={{
+                        flexGrow: 1,
+                        fontFamily: 'Dancing Script',
+                        fontWeight: "400",
+                    }}>
                         Cashly
                     </Typography>
-                    <Button
-                        //onClick={handleScrollToFeatures}
-                        variant="outlined"
-                        color="primary"
-                        sx={{
-                            fontWeight: "400",
-                            ml: 2.5
-                        }}>
+                    <Button variant="outlined" color="primary" sx={{ fontWeight: "600", ml: 4 }} onClick={() => { }}>
                         Features
                     </Button>
-                    <Button
-                        onClick={handleLoginOpen}
-                        variant="contained"
+                    <Button variant="contained"
                         color="primary"
-                        sx={{
-                            fontWeight: "400",
-                            ml: 2.5                            
-                        }}>
-                      Login
+                        sx={{ fontWeight: "600", mr: 3, ml: 3 }}
+                        onClick={() => setLoginOpen(true)}
+                    >
+                        Login
                     </Button>
                 </Toolbar>
             </AppBar>
 
-            <Container
-                maxWidth="lg"
-                sx={{
-                    mt: 14,
-                   animation: 'slideIn 1s ease-out',
-                   '@keyframes slideIn': {
-                    '0%': { transform: 'translateY(20px)', opacity: 0 },
-                    '100%': { transform: 'translateY(0)', opacity: 1 },
-                   }
-                }}>
-                <Grid container spacing={8}>
-                    {/* Left side */}
+            <Container maxWidth="lg" sx={{ flexGrow: 1, mt: 15 }}>
+                <Grid container spacing={4} alignItems="center">
+                    {/* Left side - Text */}
                     <Grid item xs={12} md={6}>
                         <Typography variant="h1" gutterBottom sx={{ letterSpacing: '0.10em', textAlign: 'left' }}>
                             Welcome to Cashly!
                         </Typography>
-                        <Typography variant="h6" gutterBottom sx={{ fontWeight: '500', lineHeight: 1.6, textAlign: 'left' }}>
-                            Simplify your finances by tracking expenses, and gaining insights into your spending habits.
+                        <Typography variant="h6" gutterBottom sx={{ fontWeight: '400', lineHeight: 1.6, textAlign: 'left' }}>
+                            Track your expenses with ease and stay on top of your finances.
+                            <br />
+                            Manage your budget effortlessly, gain full control over your spending habits.
                         </Typography>
                         <Button
                             variant="contained"
                             color="primary"
-                            onClick={handleJoinOpen}
+                            onClick={() => setJoinOpen(true)}
                             sx={{
                                 mt: 4,
-                                px: 3,
-                                py: 1.5,
+                                px: 4,
                                 transition: 'transform 0.3s ease',
                                 '&:hover': {
                                     transform: 'scale(1.1)',
                                 },
                             }}
                         >
-                            Join Now   
-                            <KeyboardArrowRightIcon />
+                            Get Started
                         </Button>
                     </Grid>
 
@@ -144,9 +115,9 @@ const LandingPage = () => {
                                 src={vector}
                                 alt="Cashly illustration"
                                 style={{
-                                    width: '110%',
+                                    width: '100%',
                                     height: 'auto',
-                                    maxWidth: '800px'
+                                    maxWidth: '400px'
                                 }}
                             />
                         </Box>
@@ -154,59 +125,8 @@ const LandingPage = () => {
                 </Grid>
             </Container>
 
-            {/* Features Section */}
-            {/*<Container ref={featuresRef} maxWidth="md" sx={{ fontWeight: '400', lineHeight: 1.6, mt: 13, mb: 10, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>*/}
-            {/*    <Typography variant="h2" gutterBottom sx={{ textAlign: 'center', letterSpacing: '0.10em', mb: 5 }}>*/}
-            {/*        Features*/}
-            {/*    </Typography>*/}
-            {/*    <Stack spacing={4}>*/}
-            {/*        <Grid item xs={12} md={4}>*/}
-            {/*            <Card sx={{ height: '100%', textAlign: 'center' }}>*/}
-            {/*                <CardContent>*/}
-            {/*                    <Typography variant="h5" gutterBottom>*/}
-            {/*                        Easy Expense Tracking*/}
-            {/*                    </Typography>*/}
-            {/*                    <Typography variant="body2">*/}
-            {/*                        Quickly add and categorize expenses, making it simple to keep track of your spending.*/}
-            {/*                    </Typography>*/}
-            {/*                </CardContent>*/}
-            {/*            </Card>*/}
-            {/*        </Grid>*/}
-            {/*        <Grid item xs={12} md={4}>*/}
-            {/*            <Card sx={{ height: '100%', textAlign: 'center' }}>*/}
-            {/*                <CardContent>*/}
-            {/*                    <Typography variant="h5" gutterBottom>*/}
-            {/*                        Budget Management*/}
-            {/*                    </Typography>*/}
-            {/*                    <Typography variant="body2">*/}
-            {/*                        Set and manage your budgets, ensuring you never overspend and stay on top of your finances.*/}
-            {/*                    </Typography>*/}
-            {/*                </CardContent>*/}
-            {/*            </Card>*/}
-            {/*        </Grid>*/}
-            {/*        <Grid item xs={12} md={4}>*/}
-            {/*            <Card sx={{ height: '100%', textAlign: 'center' }}>*/}
-            {/*                <CardContent>*/}
-            {/*                    <Typography variant="h5" gutterBottom>*/}
-            {/*                        Detailed Reports*/}
-            {/*                    </Typography>*/}
-            {/*                    <Typography variant="body2">*/}
-            {/*                        Generate insightful reports that help you analyze your spending patterns and make informed decisions.*/}
-            {/*                    </Typography>*/}
-            {/*                </CardContent>*/}
-            {/*            </Card>*/}
-            {/*        </Grid>*/}
-            {/*    </Stack>*/}
-            {/*</Container>*/}
-
             {/* Footer Section */}
-            <Box component="footer"
-                sx={{
-                  backgroundColor: '#f7fcfc',
-                  textAlign: "center",
-                    py: 1,
-                   mt: "auto"
-                }}>
+            <Box component="footer" sx={{ backgroundColor: '#f7fcfc', textAlign: "center", py: 3 }}>
                 <Container maxWidth="md">
                     <Typography variant="body2" align="center">
                         &copy; {new Date().getFullYear()} Cashly. All rights reserved.
@@ -215,9 +135,10 @@ const LandingPage = () => {
             </Box>
 
             {/* Login Modal */}
-            <Dialog open={loginOpen} onClose={handleLoginClose}>
+            <Dialog open={loginOpen} onClose={() => setLoginOpen(false)}>
                 <DialogTitle>Login</DialogTitle>
                 <DialogContent>
+                    {error && <Alert severity="error">{error}</Alert>}
                     <Box component="form" onSubmit={handleLoginSubmit} sx={{ mt: 2 }}>
                         <TextField
                             margin="dense"
@@ -226,6 +147,8 @@ const LandingPage = () => {
                             type="text"
                             fullWidth
                             required
+                            value={formData.username}
+                            onChange={handleInputChange}
                         />
                         <TextField
                             margin="dense"
@@ -234,9 +157,11 @@ const LandingPage = () => {
                             type="password"
                             fullWidth
                             required
+                            value={formData.password}
+                            onChange={handleInputChange}
                         />
                         <DialogActions>
-                            <Button onClick={handleLoginClose} color="primary">
+                            <Button onClick={() => setLoginOpen(false)} color="primary">
                                 Cancel
                             </Button>
                             <Button variant="contained" type="submit" color="primary">
@@ -247,11 +172,12 @@ const LandingPage = () => {
                 </DialogContent>
             </Dialog>
 
-            {/* Join Modal */}
-            <Dialog open={joinOpen} onClose={handleJoinClose}>
+            {/* Register Modal */}
+            <Dialog open={joinOpen} onClose={() => setJoinOpen(false)}>
                 <DialogTitle>Join</DialogTitle>
                 <DialogContent>
-                    <Box component="form" onSubmit={handleJoinSubmit} sx={{ mt: 2 }}>
+                    {error && <Alert severity="error">{error}</Alert>}
+                    <Box component="form" onSubmit={handleRegisterSubmit} sx={{ mt: 2 }}>
                         <TextField
                             margin="dense"
                             name="username"
@@ -259,6 +185,8 @@ const LandingPage = () => {
                             type="text"
                             fullWidth
                             required
+                            value={formData.username}
+                            onChange={handleInputChange}
                         />
                         <TextField
                             margin="dense"
@@ -267,9 +195,11 @@ const LandingPage = () => {
                             type="password"
                             fullWidth
                             required
+                            value={formData.password}
+                            onChange={handleInputChange}
                         />
                         <DialogActions>
-                            <Button onClick={handleJoinClose} color="primary">
+                            <Button onClick={() => setJoinOpen(false)} color="primary">
                                 Cancel
                             </Button>
                             <Button variant="contained" type="submit" color="primary">
